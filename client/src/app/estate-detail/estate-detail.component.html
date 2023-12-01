@@ -1,0 +1,103 @@
+
+<!-- header section ends -->
+
+<!-- view property section starts  -->
+
+<section class="view-property">
+
+    <div class="details">
+       <div class="thumb">
+          <div class="big-image" >
+             <img id="big-image" src="assets/images/house-img-1.webp" alt="">
+          </div>
+          <div class="small-images">
+             <img src="assets/images/house-img-1.webp" alt="">
+             <img src="assets/images/hall-img-1.webp" alt="">
+             <img src="assets/images/kitchen-img-1.webp" alt="">
+             <img src="assets/images/bathroom-img-1.webp" alt="">
+          </div>
+       </div>
+       <div class="pb-xxl-4">
+       <h2 class="h3 box pb-xxl-2">Tên DỰ ÁN</h2>
+       <h4 class="location-details">{{estate.projectId}}</h4>
+  
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-lg-7 col-md-12 pb-xxl-4">
+          <h2 class="h3 box pb-xxl-2">Details</h2>
+          <ng-container *ngIf="estate.categoryId=='1 phong ngu'; then true1 else block2" ></ng-container>
+          <ng-template #true1>
+            <h4 class="location-details pb-xxl-1">Rooms :<span> 3 Total</span></h4>
+            <h4 class="location-details pb-xxl-1">Status :<span> ready to move</span></h4>
+            <h4 class="location-details pb-xxl-1">Livingroom :<span> 1</span></h4>
+            <h4 class="location-details pb-xxl-1">Bedroom :<span> 1</span></h4>
+            <h4 class="location-details pb-xxl-1">Bathroom :<span> 1</span></h4>
+            <h4 class="location-details pb-xxl-1">Balcony :<span> 1</span></h4>
+          </ng-template>
+          <ng-template #block2>
+            <ng-container *ngIf="estate.categoryId=='2 phong ngu'; then true2 else true3"></ng-container>
+            <ng-template #true2>
+              <h4 class="location-details pb-xxl-1">Rooms :<span> 5 Total</span></h4>
+              <h4 class="location-details pb-xxl-1">Status :<span> ready to move</span></h4>
+              <h4 class="location-details pb-xxl-1">Livingroom :<span> 1</span></h4>
+              <h4 class="location-details pb-xxl-1">Bedroom :<span> 2</span></h4>
+              <h4 class="location-details pb-xxl-1">Bathroom :<span> 2</span></h4>
+              <h4 class="location-details pb-xxl-1">Balcony :<span> 1</span></h4>
+            </ng-template>
+            <ng-template #true3>
+              <ng-container *ngIf="estate.categoryId=='3 phong ngu'; then true4 else true5"></ng-container>
+              <ng-template #true4>
+                <h4 class="location-details pb-xxl-1">Rooms :<span> 7 Total</span></h4>
+                <h4 class="location-details pb-xxl-1">Status :<span> ready to move</span></h4>
+                <h4 class="location-details pb-xxl-1">Livingroom :<span> 1</span></h4>
+                <h4 class="location-details pb-xxl-1">Bedroom :<span> 3</span></h4>
+                <h4 class="location-details pb-xxl-1">Bathroom :<span> 3</span></h4>
+                <h4 class="location-details pb-xxl-1">Balcony :<span> 1</span></h4>
+              </ng-template>
+              <ng-template #true5>
+                <h4 class="location-details pb-xxl-1">Rooms :<span> 12 Total</span></h4>
+                <h4 class="location-details pb-xxl-1">Status :<span> ready to move</span></h4>
+                <h4 class="location-details pb-xxl-1">Livingroom :<span> 1</span></h4>
+                <h4 class="location-details pb-xxl-1">Kitchen :<span> 1</span></h4>
+                <h4 class="location-details pb-xxl-1">Bedroom :<span> 5</span></h4>
+                <h4 class="location-details pb-xxl-1">Bathroom :<span> 5</span></h4>
+                <h4 class="location-details pb-xxl-1">Balcony :<span> 2</span></h4>
+              </ng-template>
+            </ng-template>
+          </ng-template>
+        </div>
+        <div class="col-lg-4 col-md-8 pb-xxl-4 pb-xxl-4">
+          <h2 class="h3 box pb-xxl-2">ĐẶT CỌC:</h2>
+          <h4 class="h2 pb-xxl-1">5.000.000 <span>VND</span></h4>
+          <h4 class="location-details pb-xxl-1">Lưu ý</h4>
+          <h4 class="location-details pb-xxl-1">Nếu 30 ngày sau kể từ khi đặt cọc nếu quý khách không thanh toán sẽ mất cọc</h4>
+        </div>
+      </div>
+        <h3 class="h2">Description</h3>
+        <ng-container *ngIf="estate.categoryId=='1 phong ngu'; then tru1 else blck2" ></ng-container>
+        <ng-template #tru1>
+          <p class="description">Căn hộ 1 phòng ngủ siêu hiện đại nằm ở vị trí đắc địa, phù hợp với học sinh, sinh viên nhà có điều kiện vừa phải</p>
+        </ng-template>
+        <ng-template #blck2>
+          <ng-container *ngIf="estate.categoryId=='2 phong ngu'; then tru2 else tru3"></ng-container>
+          <ng-template #tru2>
+            <p class="description">Căn hộ 2 phòng ngủ siêu hiện đại nằm ở vị trí đắc địa, phù hợp với cặp vợ chồng trẻ muốn xây dựng tổ ấm</p>
+          </ng-template>
+          <ng-template #tru3>
+            <ng-container *ngIf="estate.categoryId=='3 phong ngu'; then tru4 else tru5"></ng-container>
+            <ng-template #tru4>
+              <p class="description">Căn hộ 3 phòng ngủ siêu hiện đại nằm ở vị trí đắc địa, phù hợp với những gia đình muốn tận hưởng cuộc sống hiện đại thoải mái</p>
+            </ng-template>
+            <ng-template #tru5>
+              <p class="description">Penhouse hiện đại bậc nhất Việt Nam sở hữu view triệu đô, bạn muốn flex cho cả facebook phải ngưỡng mộ, bạn muốn trải nghiệm cảm giác thượng đẳng</p>
+            </ng-template>
+          </ng-template>
+        </ng-template>
+        
+        <div>
+          <button type="button" class="btn btn-xs btn-primary" (click)="daDangNhap(id)">Buy</button>
+        </div>
+  
+    </div>
+  
+  </section>

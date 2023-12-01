@@ -1,0 +1,330 @@
+
+<!-- Header End -->
+
+<div class="banner-wrap">
+    <div class="container">
+      <div class="banner-box">
+        <!-- Banner Image Start -->
+        <div class="banner-box__img">
+          <img
+            src="assets/images/banner-image.jpg"
+            width="1300"
+            height="634"
+            alt=""
+          />
+        </div>
+        <!-- Banner Image End -->
+        <!-- Banner Content Start -->
+        <div class="banner-box__content">
+          <h1 class="banner-box__title h1">
+            Easy way to find a perfect property
+          </h1>
+          <div class="banner-box__txt text-ex-large">
+            We provide a complete service for the sale, purchase or rental of
+            real estate.
+          </div>
+        </div>
+        <!-- Banner Content End -->
+        <!-- Banner Tab Start  -->
+        <div class="banner-tab-wrap">
+          <!-- Tab Nav Start -->
+          <ul class="nav" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="tab-item active"
+                data-bs-toggle="pill"
+                data-bs-target="#buy"
+                type="button"
+                role="tab"
+                aria-selected="true"
+              >
+                Buy
+              </button>
+            </li>
+          </ul>
+          <!-- Tab Nav End -->
+          <!-- Tab Content Start -->
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="buy" role="tabpanel">
+              <form class="form-wrap" [formGroup]="findForm" (ngSubmit)="onFind()">
+                <div class="row align-items-end">
+                  <div class="col-md-10">
+                    <div class="row">
+                      <div class="col-md-6 col-lg-4">
+                        <div class="form-group mb-lg-0">
+                          <label class="form-label">Project</label>
+                          <select class="form-control" formControlName="projectId" (change)="ChangeProject($event)" >
+                            <option [value]="project.projectId" *ngFor="let project of projects">{{project.projectName}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-lg-4">
+                        <div class="form-group mb-lg-0">
+                          <label class="form-label">Category</label>
+                          <select class="form-control" formControlName="categoryId" (change)="ChangeCategory($event)" >
+                            <option [value]="category.categoryId" *ngFor="let category of categories">
+                              {{category.categoryName}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-lg-4">
+                        <div class="form-group mb-md-0">
+                          <label class="form-label">Min Price</label>
+                          <select class="form-control" formControlName="price" >
+                            <option>10000</option>
+                            <option>15000</option>
+                            <option>20000</option>
+                            <option>25000</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 d-md-flex">
+                    <button class="btn btn-primary btn-icon ms-auto">
+                      <i class="ri-search-2-line"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- Tab Content End -->
+        </div>
+        <!-- Banner Tab End  -->
+      </div>
+    </div>
+  </div>
+  
+  <div class="recently-added-wrap">
+    <div class="container">
+      <div
+        class="recently-added-wrap__title d-md-flex justify-content-between"
+      >
+        <h2 class="h2">Recently Estate</h2>
+      </div>
+  
+      <div class="property-list">
+        <ul  class="row">
+          <!-- data -->
+          <li *ngFor ="let estate of estates | paginate:{
+            itemsPerPage: tableSize, 
+            currentPage: page,
+            totalItems: count}; let i=index"  
+            class="col-md-6">
+            <div  class="property-box">
+              <div *ngIf="estate.estateId%3===0; then thenBlock else elseBlock"></div>
+              <ng-template #thenBlock>
+                <div *ngIf="estate.estateId%2==0; then thenBlock2 else elseBlock2"></div>
+                <ng-template  #thenBlock2>
+                  <div class="property-box__left">
+                    <img  src="https://picsum.photos/id/308/1536/1024" alt="" />
+                  </div>
+                </ng-template>
+                <ng-template  #elseBlock2>
+                  <div class="property-box__left">
+                    <img  src="https://picsum.photos/id/398/4912/3264" alt="" />
+                  </div>
+                </ng-template>
+              </ng-template>
+              <ng-template  #elseBlock>
+                <div class="property-box__left">
+                  <img  src="https://picsum.photos/id/188/2896" alt="" />
+                </div>
+              </ng-template>
+              <div class="property-box__right">
+                <div class="property-box__title h3">
+                  <a href="#">{{estate.projectId}}</a>
+                </div>
+                <div class="property-box__amenities">
+                  <span>{{estate.categoryId}}</span>
+                  <span>{{estate.statusId}}</span>
+                </div>
+                <div class="property-box__post-price">
+  
+                  <div class="property-box__price">
+                    <span class="badge">{{estate.price}}</span>
+                  </div>
+  
+                  <div *ngIf="estate.statusId =='available'" class="property-box__post-by">
+                    <button (click)="estateDetail(estate.estateId)" class="btn btn-info">
+                      View
+                    </button>
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onDataChange($event)"
+        >
+
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+  
+  <div class="banner-wrap">
+    <div class="container">
+      <div class="banner-box">
+        <!-- Banner Image Start -->
+        <div class="banner-box__img">
+          <img
+            src="assets/images/banner-image-2.jpg"
+            width="1300"
+            height="482"
+            alt=""
+          />
+        </div>
+        <!-- Banner Image End -->
+        <!-- Banner Content Start -->
+        <div class="banner-box__content">
+          <h1 class="banner-box__title h1">Find your best Real Estate</h1>
+          <div class="banner-box__txt text-ex-large">
+            We provide a complete service for the sale, purchase or rental of
+            real estate.
+          </div>
+          <div class="banner-box__cta">
+            <a href="#" class="btn btn-primary">Contact Us</a>
+          </div>
+        </div>
+        <!-- Banner Content End -->
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-wrap">
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-lg-4 col-md-8">
+            <div class="f-info">
+              <div class="f-logo pb-3">
+                <img src="assets/images/logo.svg" alt="" />
+              </div>
+              <p class="text-small pb-3">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
+              </p>
+              <div class="d-none d-lg-block">
+                <div class="social-list pb-3">
+                  <ul>
+                    <li>
+                      <a href="#" class="facebook" target="_blank"
+                        ><i class="ri-facebook-circle-fill"></i
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="#" class="twitter" target="_blank"
+                        ><i class="ri-twitter-fill"></i
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="#" class="instagram" target="_blank"
+                        ><i class="ri-instagram-fill"></i
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="#" class="linkedin" target="_blank"
+                        ><i class="ri-linkedin-box-fill"></i
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+                <p class="text-small">© 2023 . All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7 col-md-12">
+            <div class="row">
+              <div class="col-md-3 col-sm-6 col-6 pb-4 pb-md-0">
+                <h5 class="h4 pb-3">Take a tour</h5>
+                <div class="quick-links">
+                  <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Partners</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Product</a></li>
+                    <li><a href="#">Support</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 col-6 pb-4 pb-md-0">
+                <h5 class="h4 pb-3">Our Company</h5>
+                <div class="quick-links">
+                  <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Agents</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Media</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <h5 class="h4 pb-3">Subscribe</h5>
+                <div class="subscribe-form-wrap">
+                  <p class="text-small">
+                    Subscribe to get latest property, blog news from us
+                  </p>
+                  <form class="subscribe-form form-wrap">
+                    <div class="form-group">
+                      <input
+                        type="email"
+                        class="form-control"
+                        placeholder="Email Address"
+                      />
+                      <div class="cta">
+                        <button
+                          class="btn btn-primary btn-icon btn-sm btn-rounded"
+                        >
+                          <i class="ri-arrow-right-line"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-lg-none pt-4">
+          <div class="social-list pb-3">
+            <ul>
+              <li>
+                <a href="#" class="facebook" target="_blank"
+                  ><i class="ri-facebook-circle-fill"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#" class="twitter" target="_blank"
+                  ><i class="ri-twitter-fill"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#" class="instagram" target="_blank"
+                  ><i class="ri-instagram-fill"></i
+                ></a>
+              </li>
+              <li>
+                <a href="#" class="linkedin" target="_blank"
+                  ><i class="ri-linkedin-box-fill"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+          <p class="text-small">© 2023 . All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  

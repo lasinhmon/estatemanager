@@ -1,0 +1,86 @@
+<!--
+  <ul class="navbar-nav">
+  <li class="nav-item"><a class="nav-link" routerLink="" href="#">Trang chủ</a> </li>
+  <li class="nav-item"><a class="nav-link" routerLink="download" href="#">Download</a> </li>
+  <li class="nav-item"><a class="nav-link" routerLink="dangky" href="#">Đăng ký</a> </li>
+  <li class="nav-item"><a class="nav-link" routerLink="dangnhap" href="#">Đăng nhập</a> </li>
+  <li *ngIf="daDangNhap()" class="nav-item">
+    <a class="nav-link" routerLink="doipass" href="#">
+      Đổi pass
+    </a>
+  </li>
+  </ul>
+  <router-outlet></router-outlet>
+  <a href="#" (click)="thoat()">Thoat</a>
+  <p class="text-white">
+    Tình trạng đăng nhập: {{ daDangNhap() }}
+  </p> -->
+  <router-outlet>
+    <div class="header-wrap">
+      <header>
+        <div class="container">
+          <!-- Logo Start -->
+          <div class="logo">
+            <a href="">
+              <img src="assets/images/logo.svg" alt="Real Estate" />
+            </a>
+          </div>
+          <!-- Logo End -->
+          <button class="menu-toggle">
+            <i class="ri-menu-fill bar-icon"></i>
+            <i class="ri-close-fill close-icon"></i>
+          </button>
+          <div class="header-right">
+            <!-- Header Menu Start -->
+            <div class="menu">
+              <ul >
+                <li >
+                  <a class="nav-link" routerLink="" href="">
+                    Trang chủ
+                  </a>
+                </li>
+                <li *ngIf="daDangNhap()===0">
+                  <a class="nav-link" routerLink="manage" href="">
+                    Manage
+                  </a>
+                </li>
+                <li *ngIf="daDangNhap()===0">
+                  <a class="nav-link" routerLink="manage-contract" href="">
+                    Contract
+                  </a>
+                </li>
+                <li *ngIf="daDangNhap()===0">
+                  <a class="nav-link" routerLink="manage-project" href="">
+                    Project
+                  </a>
+                </li>
+                <li *ngIf="daDangNhap()===2">
+                  <a class="nav-link" routerLink="manage-user" href="">
+                    Manage User
+                  </a>
+                </li>
+                <li *ngIf="daDangNhap()===-1">
+                  <a class="nav-link" routerLink="dangky" href="#">
+                    Đăng ký
+                  </a>
+                </li>
+                <li *ngIf="daDangNhap()===-1">
+                  <a class="nav-link" routerLink="dangnhap" href="#">
+                    Đăng nhập
+                  </a>
+                </li>
+  
+              </ul>
+            </div>
+            <div class="cta" *ngIf="daDangNhap()!==-1">
+              <a class="nav-link" href="#" (click)="thoat()">
+                THOÁT
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+  
+    </div>
+  </router-outlet>
+  

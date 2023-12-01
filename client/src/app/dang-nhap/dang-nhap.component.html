@@ -1,0 +1,11 @@
+<form #frm1="ngForm" class="col-6 m-auto" (ngSubmit)="xulyDN()">
+    <h4>THÀNH VIÊN ĐĂNG NHẬP</h4>
+    <h5> <label>Username</label>
+      <input id="userName" class="form-control" type="text"  [(ngModel)] = "user.userName" name="userName">
+    </h5>
+    <h5> <label>Password</label>
+      <input id="userPassword" class="form-control" type="password"  [(ngModel)] = "user.userPassword" name="userPassword">
+    </h5>
+    <h3><button type="submit" class="btn btn-success">Đăng nhập</button></h3>
+    </form>
+  

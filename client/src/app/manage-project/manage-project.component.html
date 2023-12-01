@@ -1,0 +1,129 @@
+
+<div class="recently-added-wrap">
+
+    <div class="container">
+  <div class="card">
+    <div class="card-header bg-white">
+  
+        <button class="btn btn-sm btn-primary pull-right" (click)="btnNew()" data-bs-toggle="modal" data-bs-target="#addEditModal">
+          <i class="fas fa-plus"></i> New
+        </button>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered table-sm">
+        <thead class="table-secondary">
+          <tr>
+            <th>Id</th>
+            <th>ProjectName</th>
+            <th class="text-xxl-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="projects.length>0; else noData">
+              <tr *ngFor="let project of projects let i = index">
+                <td>{{i+1}}</td>
+                <td>{{project.projectName}}</td>
+                <td class="center-ite">
+                  <a [routerLink]="[]" class="text-info" data-bs-toggle="modal" data-bs-target="#viewModal" (click)="getProjectById(project.projectId)" ><button class="btn btn-xs btn-info me-xxl-2">
+                    View
+                  </button></a>
+                  <a [routerLink]="[]" class="text-success ms-1" data-bs-toggle="modal" data-bs-target="#addEditModal" (click)="edit(project.projectId)" ><button class="btn btn-xs btn-info me-xxl-2">
+                    Edit
+                  </button></a>
+                  <a [routerLink]="[]" class="text-danger ms-1" (click)="deleteProject(project.projectId)"><button class="btn btn-xs btn-info ">
+                    Delete
+                  </button></a>
+                </td>
+              </tr>
+          </ng-container>
+          <ng-template #noData>
+              <tr>
+                  <td colspan="8" class="text-danger">No data found</td>
+              </tr>
+          </ng-template>
+  
+        </tbody>
+      </table>
+      <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onDataChange($event)"
+        >
+
+        </pagination-controls>
+    </div>
+  </div>
+  
+  
+   <div class="modal fade" id="addEditModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h5 class="modal-title text-white">{{lblModalHeader}}</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+        <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+            <div class="form-group mb-1">
+              <div class="row">
+                <div class="col-md-3">Project Name</div>
+                <div class="col-md-9">
+                  <input type="text" class="form-control form-control-md" placeholder="Enter projectName" formControlName="projectName"/>
+                 
+                </div>
+              </div>
+            </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" #closeButton class="btn btn-sm btn-danger" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-sm btn-primary">
+            {{lblBtn}}
+          </button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="viewModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-primary">
+            <h5 class="modal-title text-white">Project Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+              <table class="table table-bordered table-sm">
+                  <tbody>
+                      <tr>
+                          <td>Project Id</td>
+                          <td>{{objProject.projectId}}</td>
+                      </tr>
+                      <tr>
+                          <td>Project Name</td>
+                          <td>{{objProject.projectName}}</td>
+                      </tr>
+                    
+                  </tbody>
+  
+              </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" #closeButton class="btn btn-sm btn-danger" data-bs-dismiss="modal">
+              <i class="fas fa-times-circle"></i> Close
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
+    </div>
+  </div>
+  
+  

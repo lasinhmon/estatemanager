@@ -1,0 +1,205 @@
+<div class="recently-added-wrap">
+
+    <div class="container">
+  <div class="card">
+    <div class="card-header bg-white">
+  
+        <button class="btn btn-sm btn-primary pull-right me-xxl-3" (click)="Statistic()">
+          <i class="fas fa-plus"></i>Statistic 
+        </button>
+        <button class="btn btn-sm btn-danger pull-left" (click)="NewContract()">
+          <i class="fas fa-plus"></i>New Contract 
+        </button>
+    </div>
+      <form class="form-wrap" [formGroup]="findForm" (ngSubmit)="onFind()">
+        <div class="row align-items-end">
+        <div class="col-md-5">
+          <div class="col-md-12 col-lg-12">
+            <input type="text" class="form-control mx-3 mt-sm-3" formControlName="userName" id="inputPassword2" placeholder="Name Owner">
+          </div>
+        </div>
+        <div class="col-md-7">
+          <button class="btn btn-primary btn-icon ms-auto">
+            <i class="ri-search-2-line"></i>
+          </button>
+        </div>
+      </div>
+      </form>
+    <div class="card-body">
+      <table class="table table-bordered table-sm">
+        <thead class="table-secondary">
+          <tr>
+            <th>Id</th>
+            <th>UserName</th>
+            <th>EstateId</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Deadline</th>
+            <th class="text-xxl-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="contracts.length>0; else noData">
+              <tr *ngFor="let contract of contracts let i = index">
+                <td>{{i+1}}</td>
+                <td>{{contract.userName}}</td>
+                <td>{{contract.estateId}}</td>
+                <td>{{contract.statusContract}}</td>
+                <td>{{contract.dateContract}}</td>
+                <td>{{contract.deadlineContract}}</td>
+                <td class="center-ite">
+                  <a [routerLink]="[]" class="text-info" data-bs-toggle="modal" data-bs-target="#viewModal" (click)="getContractById(contract.contractId)" ><button class="btn btn-xs btn-info me-xxl-2">
+                    View
+                  </button></a>
+                  <a [routerLink]="[]" class="text-success ms-1" data-bs-toggle="modal" data-bs-target="#EditModal" (click)="edit(contract.contractId)" ><button class="btn btn-xs btn-info me-xxl-2">
+                    Edit
+                  </button></a>
+                </td>
+              </tr>
+          </ng-container>
+          <ng-template #noData>
+              <tr>
+                  <td colspan="8" class="text-danger">No data found</td>
+              </tr>
+          </ng-template>
+  
+        </tbody>
+      </table>
+      <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onDataChange($event)"
+        >
+
+        </pagination-controls>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="EditModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h5 class="modal-title text-white">{{lblModalHeader}}</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+        <form (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <div class="form-group mb-1">
+            <div class="row">
+              <div class="col-md-3">Username</div>
+              <div class="col-md-9">
+                <input readonly type="text" name="userName" class="form-control form-control-md" [(ngModel)] ="objContract.userName"/>
+              </div>
+            </div>
+          </div>
+            <div class="form-group mb-1">
+              <div class="row">
+                <div class="col-md-3">EstateId</div>
+                <div class="col-md-9">
+                  <input readonly type="text" name="estateId" class="form-control form-control-md" [(ngModel)] ="objContract.estateId"/>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group mb-1">
+              <div class="row">
+                <div class="col-md-3">UrlContract</div>
+                <div class="col-md-9">
+                  <input readonly type="text" name="urlContract" class="form-control form-control-md" [(ngModel)] ="objContract.urlContract"/>
+                </div>
+              </div>
+            </div> -->
+            <div class="form-group mb-1">
+              <div class="row">
+                <div class="col-md-3">StatusContract</div>
+                <div class="col-md-9">
+                  <input readonly type="text" name="statusContract" class="form-control form-control-md" [(ngModel)] ="objContract.statusContract"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-1">
+              <div class="row">
+                <div class="col-md-3">DateContract</div>
+                <div class="col-md-9">
+                  <input readonly type="text" name="dateContract" class="form-control form-control-md" [(ngModel)] ="objContract.dateContract"/>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-1">
+              <div class="row">
+                <div class="col-md-3">DeadlineContract</div>
+                <div class="col-md-9">
+                  <input readonly type="text" name="deadlineContractContract" class="form-control form-control-md" [(ngModel)] ="objContract.deadlineContract"/>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" #closeButton class="btn btn-sm btn-danger" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-sm btn-primary">
+            {{lblBtn}}
+          </button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="viewModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-primary">
+            <h5 class="modal-title text-white">Contract Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+              <table class="table table-bordered table-sm">
+                  <tbody>
+                      <tr>
+                        <td>Id</td>
+                        <td>{{objContract.contractId}}</td>
+                      </tr>
+                      <tr>
+                        <td>UserName</td>
+                        <td>{{objContract.userName}}</td>
+                      </tr>
+                      <tr>
+                        <td>EstateId</td>
+                        <td>{{objContract.estateId}}</td>
+                      </tr>
+                      <tr>
+                        <td>Phone</td>
+                        <td>{{objContract.urlContract}}</td>
+                      </tr>
+                      <tr>
+                        <td>Status</td>
+                        <td>{{objContract.statusContract}}</td>
+                      </tr>
+                      <tr>
+                        <td>Date</td>
+                        <td>{{objContract.dateContract}}</td>
+                      </tr>
+                      <tr>
+                        <td>Deadline</td>
+                        <td>{{objContract.deadlineContract}}</td>
+                      </tr>
+                  </tbody>
+  
+              </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" #closeButton class="btn btn-sm btn-danger" data-bs-dismiss="modal">
+              <i class="fas fa-times-circle"></i> Close
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
+    </div>
+  </div>
+  
